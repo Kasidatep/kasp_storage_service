@@ -30,14 +30,11 @@ export class StorageController {
 
   @Get(`${ENV.download_endpoint}/:filename`)
   async getFile(@Param('filename') filename: string, @Response() res: any) {
-    console.log('Getting file:', filename);
     try {
       const file = await this.storageService.getFile(filename);
       const fileExtension = filename.split('.').pop();
 
       const mimeType = mime.lookup(fileExtension) || 'application/octet-stream';
-      console.log('Mime type:', mimeType);
-
       res.setHeader('Content-Type', mimeType);
       res.setHeader(
         'Content-Disposition',
