@@ -28,6 +28,11 @@ export class StorageController {
     return this.storageService.uploadMultipleFiles(files);
   }
 
+  @Get(`list`)
+  async listFiles() {
+    return this.storageService.listFiles();
+  }
+
   @Get(`${ENV.download_endpoint}/:filename`)
   async getFile(@Param('filename') filename: string, @Response() res: any) {
     try {
@@ -46,4 +51,7 @@ export class StorageController {
       res.status(404).send({ message: 'File not found' });
     }
   }
+
+
+ 
 }
