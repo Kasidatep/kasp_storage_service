@@ -51,7 +51,4 @@ export class StorageController {
       res.status(404).send({ message: 'File not found' });
     }
   }
-
-
- 
 }
