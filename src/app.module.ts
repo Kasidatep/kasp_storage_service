@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
 import { StorageModule } from './storage/storage.module';
-import { ENV } from './config/environment';
 
 @Module({
-  imports: [MongooseModule.forRoot(ENV.mongo), StorageModule],
+  imports: [ StorageModule, 
+     ConfigModule.forRoot({
+      isGlobal: true,
+    }),],
   controllers: [AppController],
   providers: [AppService],
 })

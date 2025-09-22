@@ -1,18 +1,10 @@
-import { Module } from '@nestjs/common';
 import { StorageService } from './storage.service';
 import { StorageController } from './storage.controller';
-import { FileSchema } from './schemas/file.schema';
-import { MongooseModule } from '@nestjs/mongoose';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      {
-        name: 'File',
-        schema: FileSchema,
-      },
-    ]),
-  ],
+  imports: [ConfigModule],
   controllers: [StorageController],
   providers: [StorageService],
 })
