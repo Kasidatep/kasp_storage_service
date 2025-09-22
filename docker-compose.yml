@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  storage-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kasp_storage_service
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - BASE_PATH=/api
+      - VERIFY_URL=http://localhost:3000/auth/internal/verify
+      - STORAGE_LOCAL_PATH=./uploads/files-mumya
+      - API_KEY=mumya-pharmacy-dev-key-12345
+      - PORT=3000
+      - ENV=dev
+    volumes:
+      - uploads_data:/app/uploads
+    networks:
+      - app-network
+ 
+volumes:
+  uploads_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
