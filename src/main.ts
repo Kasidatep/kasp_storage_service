@@ -7,7 +7,10 @@ async function bootstrap() {
 
   const cfg = app.get(ConfigService);
 
-  app.setGlobalPrefix(cfg.get<string>('BASE_PATH', ''))
+ app.enableCors({
+    origin: '*', // ทุก origin
+  });
+ app.setGlobalPrefix(cfg.get<string>('BASE_PATH', ''))
 
   const port = cfg.get<number>('PORT', 3000);
   const env = cfg.get('ENV')
